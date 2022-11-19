@@ -19,11 +19,11 @@ func Logic() {
 // 		m[h] = append(m[h], s)
 // 	}
 
-// 	result := make([][]string, 0, len(m))
+// 	output := make([][]string, 0, len(m))
 // 	for _, v := range m {
-// 		result = append(result, v)
+// 		output = append(output, v)
 // 	}
-// 	return result
+// 	return output
 // }
 
 func Process(start, end int, intput []string) [][]string {
@@ -34,9 +34,9 @@ func Process(start, end int, intput []string) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }

@@ -67,7 +67,7 @@ func Logic() {
 }
 ```
 
-写完这段代码，我们发现中间的处理过程，其实就只是针对input的，然后得到一个叫result的数组，期间就没有引用其他变量了，所以我们就可以将这段代码抽出来，
+写完这段代码，我们发现中间的处理过程，其实就只是针对input的，然后得到一个叫output的数组，期间就没有引用其他变量了，所以我们就可以将这段代码抽出来，
 单独作为一个function，然后就成了这个：
 ```golang
 func Process(input []string)[][]string{
@@ -78,11 +78,11 @@ func Process(input []string)[][]string{
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-    return result
+    return output
 }
 ```
 我们现在封装出来一个根据字符串**前三个字符**进行分组的函数，所以现在Process函数封装的并不通用，它最好做的能根据字符串的任意起始位置来进行分组，所以我们现在重新改写一下Process函数。
@@ -107,11 +107,11 @@ func Process(start, end int, intput []string) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 
 ```
@@ -147,11 +147,11 @@ func (g *Group) Process(start, end int) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 ```
 注：暂且叫Group吧，这个应该根据业务中具体含义来定义，最好是名词而不是动词。
@@ -222,11 +222,11 @@ func (g *Group) Process(start, end int, filters FilterFunc) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 
 type FilterFunc = func(string) bool
@@ -315,11 +315,11 @@ func (g *StrGroup) Process(start, end int, filters FilterFunc) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 
 type IntGroup struct {
@@ -344,11 +344,11 @@ func (g *IntGroup) Process(start, end int, filters FilterFunc) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 ```
 我们发现两个struct中有想用的Process函数，而且出参和入参相同，所以我们就可以抽象出一个 interface，代指具有相同行为的一类，

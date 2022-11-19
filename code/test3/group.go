@@ -20,11 +20,11 @@ func (g *Group) Process(start, end int, filters FilterFunc) [][]string {
 		m[h] = append(m[h], s)
 	}
 
-	result := make([][]string, 0, len(m))
+	output := make([][]string, 0, len(m))
 	for _, v := range m {
-		result = append(result, v)
+		output = append(output, v)
 	}
-	return result
+	return output
 }
 
 type FilterFunc = func(string) bool
